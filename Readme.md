@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Ольга Богатырева](https://up.htmlacademy.ru/javascript/26/user/1852051).
-* Наставник:  [Дмитрий Железцов](https://htmlacademy.ru/profile/sench).
+* Наставник: [Дмитрий Железцов](https://htmlacademy.ru/profile/sench).
 
 ---
 
