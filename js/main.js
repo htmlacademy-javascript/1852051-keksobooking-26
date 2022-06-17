@@ -26,4 +26,3 @@ function randomFloat(min, max, fractionDigits) {
   }
   return (Math.random() * (max - min) + min).toFixed(fractionDigits);
 }
-
