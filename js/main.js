@@ -25,12 +25,18 @@ function getRandomFloat(min, max, fractionDigits) {
 }
 
 const TYPE_OFFER = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-const CHECKIN = ['12:00', '13:00', '14:00'];
-const CHECKOUT = ['12:00', '13:00', '14:00'];
+const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
+function getNumberAvatarImg(min, max) {
+  const resultNum = getRandomInteger(min, max);
+  if (resultNum < 10) {
+    return `0${resultNum}`;
+  }
+  return `${resultNum}`;
+}
 
 const randomObject = () => {
   const rndLocation = {
@@ -50,8 +56,8 @@ const randomObject = () => {
       type: TYPE_OFFER[getRandomInteger(0, TYPE_OFFER.length - 1)],
       rooms: getRandomInteger(1, 5),
       guests: getRandomInteger(1, 4),
-      checkin: CHECKIN[getRandomInteger(0, CHECKIN.length - 1)],
-      checkout: CHECKOUT[getRandomInteger(0, CHECKOUT.length - 1)],
+      checkin: TIMES[getRandomInteger(0, TIMES.length - 1)],
+      checkout: TIMES[getRandomInteger(0, TIMES.length - 1)],
       features: getArrayRandomLength(FEATURES),
       description: 'Для размещения предлагаются комфортабельный номер, оформленый в индивидуальном стиле и оборудованый современной мебелью, ЖК-телевизором, кабельным телевидением, индивидуальной системой кондиционирования. Собственная уборная укомплектована душевой кабиной, туалетом, раковиной и средствами гигиены.',
       photos: getArrayRandomLength(PHOTOS)
@@ -59,24 +65,6 @@ const randomObject = () => {
     location: rndLocation
   };
 };
-
-const bookingForm = function () {
-  const objects = [];
-  for (let i = 0; i < 10; i++) {
-    objects.push(randomObject());
-  }
-  return objects;
-};
-
-bookingForm();
-
-function getNumberAvatarImg(min, max) {
-  const resultNum = getRandomInteger(min, max);
-  if (resultNum < 10) {
-    return `0${resultNum}`;
-  }
-  return `${resultNum}`;
-}
 
 function getArrayRandomLength(arr) {
   const resultArray = [];
@@ -93,4 +81,14 @@ function getArrayRandomLength(arr) {
   }
   return resultArray;
 }
+
+const bookingForm = function () {
+  const objects = [];
+  for (let i = 0; i < 10; i++) {
+    objects.push(randomObject());
+  }
+  return objects;
+};
+
+bookingForm();
 
