@@ -1,4 +1,3 @@
-import {bookingForm} from './data.js';
 import {typeNameByType} from './data.js';
 
 const elementByCardData = (cardData) => {
@@ -46,6 +45,8 @@ const elementByCardData = (cardData) => {
       const photo = document.createElement('img');
       photo.classList.add('popup__photo');
       photo.src = cardData.offer.photos[i];
+      photo.style.width = '45px';
+      photo.style.height = '40px';
       photosList.appendChild(photo);
     }
   }
@@ -56,5 +57,7 @@ const elementByCardData = (cardData) => {
 
   return popup;
 };
+
+elementByCardData();
 
 
