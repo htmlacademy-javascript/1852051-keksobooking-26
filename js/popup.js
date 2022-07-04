@@ -1,4 +1,3 @@
-import {bookingForm} from './data.js';
 import {typeNameByType} from './data.js';
 
 const elementByCardData = (cardData) => {
@@ -59,7 +58,6 @@ const elementByCardData = (cardData) => {
   return popup;
 };
 
-document.addEventListener('DOMContentLoaded', () => {
-  const data = bookingForm();
-  document.querySelector('#map-canvas').appendChild(elementByCardData(data[0]));
-});
+elementByCardData();
+
+
