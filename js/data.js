@@ -19,8 +19,7 @@ const randomType = () => {
 };
 
 const typeNameByType = (type) => {
-  // eslint-disable-next-line no-prototype-builtins
-  if (TYPE_OFFERS.hasOwnProperty(type)) {
+  if (Object.keys(TYPE_OFFERS).includes(type)) {
     return TYPE_OFFERS[type];
   }
   return 'Неизвесный тип';
