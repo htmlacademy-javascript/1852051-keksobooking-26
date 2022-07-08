@@ -380,6 +380,11 @@ fieldset {
   border-radius: 4px;
 }
 
+.ad-form__error-text {
+  color: #8b0000ff;
+  margin-top: 5px;
+}
+
 .ad-form__element input:hover,
 .ad-form__element select:hover,
 .ad-form__element textarea:hover {
