@@ -2,11 +2,11 @@ import {randomInteger, randomFloat, arrayRandomLength, numberAvatarImg} from './
 
 const TITLES = ['Уютное гнездышко для молодоженов', 'Прекрасный номер с видом на море', 'Прекрасный номер с видом на океан', 'Прекрасный номер с видом на закат', 'Прекрасный номер в горах'];
 const TYPE_OFFERS = {
-  'flat': 'Квартира',
-  'bungalow': 'Бунгало',
-  'house': 'Дом',
-  'palace': 'Дворец',
-  'hotel': 'Отель',
+  bungalow: {name: 'Бунгало', minPrice: 0},
+  flat: {name: 'Квартира', minPrice: 1000},
+  hotel: {name: 'Отель', minPrice: 3000},
+  house: {name: 'Дом', minPrice: 5000},
+  palace: {name: 'Дворец', minPrice: 10000},
 };
 const TIMES = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -20,9 +20,16 @@ const randomType = () => {
 
 const typeNameByType = (type) => {
   if (Object.keys(TYPE_OFFERS).includes(type)) {
-    return TYPE_OFFERS[type];
+    return TYPE_OFFERS[type].name;
   }
   return 'Неизвесный тип';
+};
+
+const typeMinPriceByType = (type) => {
+  if (Object.keys(TYPE_OFFERS).includes(type)) {
+    return TYPE_OFFERS[type].minPrice;
+  }
+  return 0;
 };
 
 const randomObject = () => {
@@ -65,7 +72,4 @@ const bookingForm = () => {
   return objects;
 };
 
-
-export {randomObject};
-export {bookingForm};
-export {typeNameByType};
+export {randomObject, bookingForm, typeNameByType, typeMinPriceByType};
