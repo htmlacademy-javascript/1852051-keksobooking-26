@@ -45,5 +45,6 @@ function activeStatePage() {
 
 document.addEventListener('DOMContentLoaded', () => {
   inactiveStatePage();
-  activeStatePage();
 });
+
+export {activeStatePage};
