@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     errorTextTag: 'div',
   }, false);
 
+  pristine.addValidator(adFormPrice, (value) => {
+    const min = adFormPrice.getAttribute('min');
+    return value > min;
+  }, 'Недопустимое минимальное значение');
+
   createUiSlider(slider, 5000, typeMinPriceByType(adFormType.value));
 
   adFormPrice.addEventListener('change', (evt) => {
