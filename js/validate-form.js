@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     errorTextTag: 'div',
   }, false);
 
+  pristine.addValidator(adFormPrice, (value) => {
+    const min = adFormPrice.getAttribute('min');
+    return value > min;
+  }, 'Недопустимое минимальное значение');
+
   createUiSlider(slider, 5000, typeMinPriceByType(adFormType.value));
 
   adFormPrice.addEventListener('change', (evt) => {
@@ -46,13 +51,19 @@ document.addEventListener('DOMContentLoaded', () => {
     createUiSlider(slider, adFormPrice.value, minPrice);
   });
 
+  const adFormTimein = document.querySelector('#timein');
+  const adFormTimeout = document.querySelector('#timeout');
+
+  adFormTimein.addEventListener('change', (evt) => {
+    adFormTimeout.value = evt.target.value;
+  });
+
+  adFormTimeout.addEventListener('change', (evt) => {
+    adFormTimein.value = evt.target.value;
+  });
+
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      // console.log('Можно отправлять');
-    } else {
-      // console.log('Форма невалидна');
-    }
+    pristine.validate();
   });
 });
