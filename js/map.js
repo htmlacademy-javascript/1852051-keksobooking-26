@@ -1,5 +1,6 @@
 import {activeStatePage} from './state-page.js';
-import {bookingForm} from './data.js';
+import {bookingForm, randomObject} from './data.js';
+import {elementByCardData} from './popup.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-canvas')
@@ -26,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const marker = L.marker(
     {
-      lat: 35.4200,
-      lng: 139.2530,
+      lat: 35.6863,
+      lng: 139.7388,
     },
     {
       draggable: true,
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     evt.target.getLatLng();
   });
 
-  marker.addTo(map);
+  marker.addTo(map).bindPopup(elementByCardData(randomObject()));
 
   const icon = L.icon({
     iconUrl: './img/pin.svg',
@@ -56,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         icon,
       },
-    ).addTo(map);
+    )
+      .addTo(map)
+      .bindPopup(elementByCardData(item));
   });
 });
