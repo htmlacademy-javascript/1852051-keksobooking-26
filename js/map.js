@@ -1,4 +1,5 @@
 import {activeStatePage} from './state-page.js';
+import {bookingForm} from './data.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-canvas')
@@ -39,4 +40,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   marker.addTo(map);
+
+  const icon = L.icon({
+    iconUrl: './img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  bookingForm().forEach((item) => {
+    L.marker(
+      {
+        lat: item.location.lat,
+        lng: item.location.lng,
+      },
+      {
+        icon,
+      },
+    ).addTo(map);
+  });
 });
