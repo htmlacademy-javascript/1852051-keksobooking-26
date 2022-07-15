@@ -1,6 +1,6 @@
 import {activeStatePage} from './state-page.js';
-import {bookingForm, randomObject} from './data.js';
 import {elementByCardData} from './popup.js';
+import {offers} from './network.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-canvas')
@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
       activeStatePage();
     })
     .setView({
-      lat: 35.4122,
-      lng: 139.2530,
-    }, 10);
+      lat: 35.6863,
+      lng: 139.7388,
+    }, 14);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     evt.target.getLatLng();
   });
 
-  marker.addTo(map).bindPopup(elementByCardData(randomObject()));
+  marker.addTo(map);
 
   const icon = L.icon({
     iconUrl: './img/pin.svg',
@@ -48,17 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
     iconAnchor: [20, 40],
   });
 
-  bookingForm().forEach((item) => {
-    L.marker(
-      {
-        lat: item.location.lat,
-        lng: item.location.lng,
-      },
-      {
-        icon,
-      },
-    )
-      .addTo(map)
-      .bindPopup(elementByCardData(item));
+  offers().then((offersData) => {
+    offersData.forEach((item) => {
+      L.marker(
+        {
+          lat: item.location.lat,
+          lng: item.location.lng,
+        },
+        {
+          icon,
+        },
+      )
+        .addTo(map)
+        .bindPopup(elementByCardData(item));
+    });
   });
 });
