@@ -1,4 +1,4 @@
-import {randomObject, typeNameByType} from './data.js';
+import {typeNameByType} from './data.js';
 
 const elementByCardData = (cardData) => {
   const popupTemplate = document.querySelector('#card').content;
@@ -58,5 +58,4 @@ const elementByCardData = (cardData) => {
   return popup;
 };
 
-elementByCardData(randomObject());
-
+export {elementByCardData};
