@@ -5,4 +5,12 @@ const offers = () => fetch(
   }
 ).then((response) => response.json());
 
-export {offers};
+const saveOffer = (formData) => fetch(
+  'https://26.javascript.pages.academy/keksobooking',
+  {
+    method: 'POST',
+    body: formData
+  }
+);
+
+export {offers, saveOffer};

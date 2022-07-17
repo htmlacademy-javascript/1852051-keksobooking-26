@@ -1,4 +1,5 @@
 import {typeMinPriceByType} from './data.js';
+import {saveOffer} from './network.js';
 
 function createUiSlider(slider, start, min) {
   noUiSlider.create(slider, {
@@ -18,6 +19,25 @@ function createUiSlider(slider, start, min) {
     adFormPrice.placeholder = price;
   });
 }
+
+const sendForm = (pristine, adForm) => {
+  const isValid = pristine.validate();
+
+  if (isValid) {
+    const formData = new FormData(adForm);
+    saveOffer(formData).then((response) => {
+      if (response.ok) {
+        const successTempl = document.querySelector('#success').content;
+        const successPopup = successTempl.cloneNode(true);
+        document.querySelector('body').appendChild(successPopup);
+      } else {
+        const errorTempl = document.querySelector('#error').content;
+        const errorPopup = errorTempl.cloneNode(true);
+        document.querySelector('body').appendChild(errorPopup);
+      }
+    });
+  }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const adForm = document.querySelector('.ad-form');
@@ -64,6 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   adForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    pristine.validate();
+    sendForm(pristine, adForm);
   });
 });

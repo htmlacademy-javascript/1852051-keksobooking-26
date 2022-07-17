@@ -62,5 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .addTo(map)
         .bindPopup(elementByCardData(item));
     });
+  }).catch(() => {
+    const errorTemplate = document.querySelector('#error-get-data').content;
+    const popup = errorTemplate.cloneNode(true);
+    document.querySelector('body').appendChild(popup);
   });
 });
