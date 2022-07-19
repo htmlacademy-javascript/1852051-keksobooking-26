@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   marker.on('moveend', (evt) => {
-    evt.target.getLatLng();
+    document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(4)} ${evt.target.getLatLng().lng.toFixed(4)}`;
   });
 
   marker.addTo(map);
