@@ -35,6 +35,10 @@ const sendForm = (pristine, adForm) => {
         const errorPopup = errorTempl.cloneNode(true);
         document.querySelector('body').appendChild(errorPopup);
       }
+    }).catch(() => {
+      const errorTempl = document.querySelector('#error').content;
+      const errorPopup = errorTempl.cloneNode(true);
+      document.querySelector('body').appendChild(errorPopup);
     });
   }
 };
