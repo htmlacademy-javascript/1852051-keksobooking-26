@@ -1,5 +1,6 @@
 import {typeMinPriceByType} from './data.js';
 import {saveOffer} from './network.js';
+import {removePopup} from './popup.js';
 
 function createUiSlider(slider, start, min) {
   noUiSlider.create(slider, {
@@ -33,11 +34,17 @@ const sendForm = (pristine, adForm) => {
       } else {
         const errorTempl = document.querySelector('#error').content;
         const errorPopup = errorTempl.cloneNode(true);
+        errorPopup.querySelector('.error__button').addEventListener('click', () => {
+          removePopup('error');
+        });
         document.querySelector('body').appendChild(errorPopup);
       }
     }).catch(() => {
       const errorTempl = document.querySelector('#error').content;
       const errorPopup = errorTempl.cloneNode(true);
+      errorPopup.querySelector('.error__button').addEventListener('click', () => {
+        removePopup('error');
+      });
       document.querySelector('body').appendChild(errorPopup);
     });
   }

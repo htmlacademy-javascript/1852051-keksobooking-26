@@ -58,4 +58,11 @@ const elementByCardData = (cardData) => {
   return popup;
 };
 
-export {elementByCardData};
+const removePopup = (className) => {
+  const elem = document.querySelector(`.${className}`);
+  if (elem) {
+    elem.remove();
+  }
+};
+
+export {elementByCardData, removePopup};
