@@ -1,6 +1,31 @@
 import {activeStatePage} from './state-page.js';
 import {elementByCardData} from './popup.js';
 import {offers} from './network.js';
+import {filters, setFiltersListeners} from './filters.js';
+
+const renderMarkers = (offersData, markerGroup) => {
+  const offerIcon = L.icon({
+    iconUrl: './img/pin.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+  });
+
+  markerGroup.clearLayers();
+
+  offersData.forEach((item) => {
+    L.marker(
+      {
+        lat: item.location.lat,
+        lng: item.location.lng,
+      },
+      {
+        icon: offerIcon,
+      },
+    )
+      .addTo(markerGroup)
+      .bindPopup(elementByCardData(item));
+  });
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-canvas')
@@ -42,26 +67,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   marker.addTo(map);
 
-  const icon = L.icon({
-    iconUrl: './img/pin.svg',
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-  });
-
   offers().then((offersData) => {
-    offersData = offersData.slice(0, 10);
-    offersData.forEach((item) => {
-      L.marker(
-        {
-          lat: item.location.lat,
-          lng: item.location.lng,
-        },
-        {
-          icon,
-        },
-      )
-        .addTo(map)
-        .bindPopup(elementByCardData(item));
+    const markerGroup = L.layerGroup().addTo(map);
+    filters(offersData, markerGroup);
+
+    setFiltersListeners(() => {
+      filters(offersData, markerGroup);
     });
   }).catch(() => {
     const errorTemplate = document.querySelector('#error-get-data').content;
@@ -69,3 +80,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('body').appendChild(popup);
   });
 });
+
+export {renderMarkers};

@@ -5,6 +5,7 @@ import './state-page.js';
 import './validate-form.js';
 import './map.js';
 import './network.js';
+import './filters.js';
 import {removePopup} from './popup.js';
 
 document.addEventListener('DOMContentLoaded', () => {
