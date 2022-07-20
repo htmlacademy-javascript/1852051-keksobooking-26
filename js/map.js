@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   offers().then((offersData) => {
+    offersData = offersData.slice(0, 10);
     offersData.forEach((item) => {
       L.marker(
         {
