@@ -1,4 +1,5 @@
 import {renderMarkers} from './map.js';
+import {debounce} from './utils.js';
 
 const filters = (offersData, markerGroup) => {
   const housingTypeValue = document.querySelector('#housing-type').value;
@@ -44,7 +45,7 @@ const filters = (offersData, markerGroup) => {
     })
     .filter((offer) => {
 
-      if(!Object.prototype.hasOwnProperty.call(offer.offer, 'features')){
+      if (!Object.prototype.hasOwnProperty.call(offer.offer, 'features')) {
         return false;
       }
       for (let i = 0; i < features.length; i++) {
@@ -52,16 +53,16 @@ const filters = (offersData, markerGroup) => {
           return false;
         }
       }
-      return  true;
+      return true;
     });
 
   renderMarkers(offersData.slice(0, 10), markerGroup);
 };
 
 const addFilterListener = (filterName, callback) => {
-  document.querySelector(`#${filterName}`).addEventListener('change', () => {
+  document.querySelector(`#${filterName}`).addEventListener('change', debounce(() => {
     callback();
-  });
+  }));
 };
 
 const setFiltersListeners = (callback) => {
