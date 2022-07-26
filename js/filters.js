@@ -9,6 +9,9 @@ const filters = (offersData, markerGroup) => {
 
   const checkedFeatures = document.querySelectorAll('[name=features]:checked');
   const features = [];
+  const DEFAULT_VALUE = 'any';
+  const HIGH_PRICE = 50000;
+  const LOW_PRICE = 10000;
   checkedFeatures.forEach((featur) => features.push(featur.value));
 
   offersData = offersData.filter((offer) => {
@@ -18,27 +21,27 @@ const filters = (offersData, markerGroup) => {
     return offer.offer.type === housingTypeValue;
   })
     .filter((offer) => {
-      if (housingPriceValue === 'any') {
+      if (housingPriceValue === DEFAULT_VALUE) {
         return true;
       }
-      if (housingPriceValue === 'middle' && offer.offer.price >= 10000 && offer.offer.price <= 50000) {
+      if (housingPriceValue === 'middle' && offer.offer.price >= LOW_PRICE && offer.offer.price <= HIGH_PRICE) {
         return true;
       }
-      if (housingPriceValue === 'low' && offer.offer.price < 10000) {
+      if (housingPriceValue === 'low' && offer.offer.price < LOW_PRICE) {
         return true;
       }
-      if (housingPriceValue === 'high' && offer.offer.price > 50000) {
+      if (housingPriceValue === 'high' && offer.offer.price > HIGH_PRICE) {
         return true;
       }
     })
     .filter((offer) => {
-      if (housingRoomsValue === 'any') {
+      if (housingRoomsValue === DEFAULT_VALUE) {
         return true;
       }
       return parseInt(offer.offer.rooms, 10) === parseInt(housingRoomsValue, 10);
     })
     .filter((offer) => {
-      if (housingGuestsValue === 'any') {
+      if (housingGuestsValue === DEFAULT_VALUE) {
         return true;
       }
       return parseInt(offer.offer.guests, 10) === parseInt(housingGuestsValue, 10);
