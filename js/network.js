@@ -1,4 +1,4 @@
-const offers = () => fetch(
+const getOffers = () => fetch(
   'https://26.javascript.pages.academy/keksobooking/data',
   {
     method: 'GET'
@@ -13,4 +13,4 @@ const saveOffer = (formData) => fetch(
   }
 );
 
-export {offers, saveOffer};
+export {getOffers, saveOffer};

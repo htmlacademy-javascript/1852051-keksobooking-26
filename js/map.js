@@ -1,6 +1,6 @@
 import {activeStatePage} from './state-page.js';
 import {elementByCardData} from './popup.js';
-import {offers} from './network.js';
+import {getOffers} from './network.js';
 import {filters, setFiltersListeners} from './filters.js';
 
 const renderMarkers = (offersData, markerGroup) => {
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   marker.addTo(map);
 
-  offers().then((offersData) => {
+  getOffers().then((offersData) => {
     const markerGroup = L.layerGroup().addTo(map);
     filters(offersData, markerGroup);
 
