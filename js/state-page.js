@@ -2,9 +2,9 @@ const inactiveStatePage = () => {
   const adFormElement = document.querySelector('.ad-form');
   adFormElement.classList.add('ad-form--disabled');
 
-  const fieldsetCollection = adFormElement.querySelectorAll('fieldset');
-  for (let i = 0; i < fieldsetCollection.length; i++) {
-    fieldsetCollection[i].setAttribute('disabled', 'disabled');
+  const fieldsetCollectionElements = adFormElement.querySelectorAll('fieldset');
+  for (let i = 0; i < fieldsetCollectionElements.length; i++) {
+    fieldsetCollectionElements[i].setAttribute('disabled', 'disabled');
   }
 
   adFormElement.querySelector('.ad-form__slider').classList.add('ad-form__slider--disabled');
@@ -25,9 +25,9 @@ const activeStatePage = () => {
   const adFormElement = document.querySelector('.ad-form');
   adFormElement.classList.remove('ad-form--disabled');
 
-  const fieldsetCollection = adFormElement.querySelectorAll('fieldset');
-  for (let i = 0; i < fieldsetCollection.length; i++) {
-    fieldsetCollection[i].removeAttribute('disabled');
+  const fieldsetCollectionElements = adFormElement.querySelectorAll('fieldset');
+  for (let i = 0; i < fieldsetCollectionElements.length; i++) {
+    fieldsetCollectionElements[i].removeAttribute('disabled');
   }
   adFormElement.querySelector('.ad-form__slider').classList.remove('ad-form__slider--disabled');
 

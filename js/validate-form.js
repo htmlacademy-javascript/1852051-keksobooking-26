@@ -28,20 +28,20 @@ const sendForm = (pristine, adForm) => {
     const formData = new FormData(adForm);
     saveOffer(formData).then((response) => {
       if (response.ok) {
-        const successTemplElement = document.querySelector('#success').content;
-        const successPopupElement = successTemplElement.cloneNode(true);
+        const successTemplateElement = document.querySelector('#success').content;
+        const successPopupElement = successTemplateElement.cloneNode(true);
         document.querySelector('body').appendChild(successPopupElement);
       } else {
-        const errorTemplElement = document.querySelector('#error').content;
-        const errorPopupElement = errorTemplElement.cloneNode(true);
+        const errorTemplateElement = document.querySelector('#error').content;
+        const errorPopupElement = errorTemplateElement.cloneNode(true);
         errorPopupElement.querySelector('.error__button').addEventListener('click', () => {
           removePopup('error');
         });
         document.querySelector('body').appendChild(errorPopupElement);
       }
     }).catch(() => {
-      const errorTemplElement = document.querySelector('#error').content;
-      const errorPopupElement = errorTemplElement.cloneNode(true);
+      const errorTemplateElement = document.querySelector('#error').content;
+      const errorPopupElement = errorTemplateElement.cloneNode(true);
       errorPopupElement.querySelector('.error__button').addEventListener('click', () => {
         removePopup('error');
       });

@@ -12,7 +12,7 @@ const filters = (offersData, markerGroup) => {
   const housingGuestsValueElement = document.querySelector('#housing-guests').value;
   const checkedFeaturesElement = document.querySelectorAll('[name=features]:checked');
   const features = [];
-  checkedFeaturesElement.forEach((featur) => features.push(featur.value));
+  checkedFeaturesElement.forEach((feature) => features.push(feature.value));
 
   offersData = offersData.filter((offer) => {
     if (housingTypeValueElement === DEFAULT_VALUE) {
