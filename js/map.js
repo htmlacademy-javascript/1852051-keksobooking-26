@@ -32,7 +32,13 @@ const DEFAULT_LOCATION = {
   lng: 139.7388,
 };
 
+const setLocationToInput = (location) => {
+  document.querySelector('#address').value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+  setLocationToInput(DEFAULT_LOCATION);
+
   const map = L.map('map-canvas')
     .on('load', () => {
       activeStatePage();
@@ -61,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   marker.on('moveend', (evt) => {
-    document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(5)} ${evt.target.getLatLng().lng.toFixed(5)}`;
+    setLocationToInput(evt.target.getLatLng());
   });
 
   marker.addTo(map);
