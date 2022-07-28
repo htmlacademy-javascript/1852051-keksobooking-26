@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const adFormElement = document.querySelector('.ad-form');
   const adFormPriceElement = document.querySelector('#price');
   const adFormTypeElement = document.querySelector('#type');
+  const adFormCapacityElement = document.querySelector('#capacity');
+  const adFormRoomNumberElement = document.querySelector('#room_number');
   const sliderElement = document.querySelector('.ad-form__slider');
 
   const pristine = new Pristine(adFormElement, {
@@ -70,6 +72,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const min = adFormPriceElement.getAttribute('min');
     return value > min;
   }, 'Недопустимое минимальное значение');
+
+  pristine.addValidator(adFormCapacityElement, (value) => {
+    const roomNumber = parseInt(adFormRoomNumberElement.value, 10);
+    const capacity = parseInt(value, 10);
+    if (roomNumber === 1) {
+      return [1].includes(capacity);
+    }
+    if (roomNumber === 2) {
+      return [1, 2].includes(capacity);
+    }
+    if (roomNumber === 2) {
+      return [1, 2].includes(capacity);
+    }
+    if (roomNumber === 3) {
+      return [1, 2, 3].includes(capacity);
+    }
+    if (roomNumber === 100) {
+      return [0].includes(capacity);
+    }
+    return false;
+  }, 'Недопустимое количество мест для текущего значения количества комнат');
 
   createUiSlider(sliderElement, 5000, typeMinPriceByType(adFormTypeElement.value));
 
