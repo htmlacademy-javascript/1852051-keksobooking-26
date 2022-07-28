@@ -1,16 +1,20 @@
-const offers = () => fetch(
+const getOffers = () => fetch(
   'https://26.javascript.pages.academy/keksobooking/data',
   {
     method: 'GET'
   }
 ).then((response) => response.json());
 
-const saveOffer = (formData) => fetch(
-  'https://26.javascript.pages.academy/keksobooking',
-  {
-    method: 'POST',
-    body: formData
-  }
-);
+const saveOffer = (formData) => {
+  document.querySelector('.ad-form__submit').disabled = true;
 
-export {offers, saveOffer};
+  return fetch(
+    'https://26.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body: formData
+    }
+  );
+};
+
+export {getOffers, saveOffer};

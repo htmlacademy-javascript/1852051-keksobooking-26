@@ -1,7 +1,13 @@
 import {activeStatePage} from './state-page.js';
 import {elementByCardData} from './popup.js';
-import {offers} from './network.js';
-import {filters, setFiltersListeners} from './filters.js';
+import {getOffers} from './network.js';
+import {filters, resetFilters, setFiltersListeners} from './filters.js';
+
+const DEFAULT_LOCATION = {
+  lat: 35.6863,
+  lng: 139.7388,
+};
+const DEFAULT_PREVIEW_IMG_PATH = 'img/muffin-grey.svg';
 
 const renderMarkers = (offersData, markerGroup) => {
   const offerIcon = L.icon({
@@ -27,15 +33,18 @@ const renderMarkers = (offersData, markerGroup) => {
   });
 };
 
+const setLocationToInput = (location) => {
+  document.querySelector('#address').value = `${location.lat.toFixed(5)} ${location.lng.toFixed(5)}`;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+  setLocationToInput(DEFAULT_LOCATION);
+
   const map = L.map('map-canvas')
     .on('load', () => {
       activeStatePage();
     })
-    .setView({
-      lat: 35.6863,
-      lng: 139.7388,
-    }, 14);
+    .setView(DEFAULT_LOCATION, 14);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -51,10 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const marker = L.marker(
-    {
-      lat: 35.6863,
-      lng: 139.7388,
-    },
+    DEFAULT_LOCATION,
     {
       draggable: true,
       icon: mainPinIcon,
@@ -62,12 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   marker.on('moveend', (evt) => {
-    document.querySelector('#address').value = `${evt.target.getLatLng().lat.toFixed(5)} ${evt.target.getLatLng().lng.toFixed(5)}`;
+    setLocationToInput(evt.target.getLatLng());
   });
 
   marker.addTo(map);
 
-  offers().then((offersData) => {
+  getOffers().then((offersData) => {
     const markerGroup = L.layerGroup().addTo(map);
     filters(offersData, markerGroup);
 
@@ -75,9 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
       filters(offersData, markerGroup);
     });
   }).catch(() => {
-    const errorTemplate = document.querySelector('#error-get-data').content;
-    const popup = errorTemplate.cloneNode(true);
-    document.querySelector('body').appendChild(popup);
+    const errorTemplateElement = document.querySelector('#error-get-data').content;
+    const popupElement = errorTemplateElement.cloneNode(true);
+    document.querySelector('body').appendChild(popupElement);
+  });
+
+  document.querySelector('.ad-form').addEventListener('reset', () => {
+    document.querySelector('.ad-form').reset();
+    document.querySelector('.ad-form-header__preview img').src = DEFAULT_PREVIEW_IMG_PATH;
+    document.querySelector('.ad-form__photo img').src = DEFAULT_PREVIEW_IMG_PATH;
+    resetFilters();
+    map.setView(DEFAULT_LOCATION, 14);
+    marker.setLatLng(DEFAULT_LOCATION);
+    setTimeout(() => {
+      setLocationToInput(DEFAULT_LOCATION);
+    }, 50);
   });
 });
 
