@@ -31,6 +31,7 @@ const sendForm = (pristine, adForm) => {
         const successTemplateElement = document.querySelector('#success').content;
         const successPopupElement = successTemplateElement.cloneNode(true);
         document.querySelector('body').appendChild(successPopupElement);
+        document.querySelector('.ad-form').dispatchEvent(new Event('reset'));
       } else {
         const errorTemplateElement = document.querySelector('#error').content;
         const errorPopupElement = errorTemplateElement.cloneNode(true);
@@ -39,6 +40,7 @@ const sendForm = (pristine, adForm) => {
         });
         document.querySelector('body').appendChild(errorPopupElement);
       }
+      document.querySelector('.ad-form__submit').disabled = false;
     }).catch(() => {
       const errorTemplateElement = document.querySelector('#error').content;
       const errorPopupElement = errorTemplateElement.cloneNode(true);
@@ -46,6 +48,7 @@ const sendForm = (pristine, adForm) => {
         removePopup('error');
       });
       document.querySelector('body').appendChild(errorPopupElement);
+      document.querySelector('.ad-form__submit').disabled = false;
     });
   }
 };

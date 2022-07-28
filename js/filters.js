@@ -81,4 +81,15 @@ const setFiltersListeners = (callback) => {
   addFilterListener('filter-conditioner', callback);
 };
 
-export {filters, setFiltersListeners};
+const resetFilters = () => {
+  document.querySelector('#housing-type').value = DEFAULT_VALUE;
+  document.querySelector('#housing-price').value = DEFAULT_VALUE;
+  document.querySelector('#housing-rooms').value = DEFAULT_VALUE;
+  document.querySelector('#housing-guests').value = DEFAULT_VALUE;
+  document.querySelectorAll('[name=features]:checked').forEach((item) => {
+    item.checked = false;
+  });
+  document.querySelector('#housing-type').dispatchEvent(new Event('change'));
+};
+
+export {filters, setFiltersListeners, resetFilters};
