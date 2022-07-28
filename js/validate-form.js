@@ -14,10 +14,10 @@ const createUiSlider = (slider, start, min) => {
   });
 
   slider.noUiSlider.on('update', (values) => {
-    const adFormPrice = document.querySelector('#price');
+    const adFormPriceElement = document.querySelector('#price');
     const price = parseInt(values[0], 10);
-    adFormPrice.value = price;
-    adFormPrice.placeholder = price;
+    adFormPriceElement.value = price;
+    adFormPriceElement.placeholder = price;
   });
 };
 
@@ -28,73 +28,73 @@ const sendForm = (pristine, adForm) => {
     const formData = new FormData(adForm);
     saveOffer(formData).then((response) => {
       if (response.ok) {
-        const successTempl = document.querySelector('#success').content;
-        const successPopup = successTempl.cloneNode(true);
-        document.querySelector('body').appendChild(successPopup);
+        const successTemplElement = document.querySelector('#success').content;
+        const successPopupElement = successTemplElement.cloneNode(true);
+        document.querySelector('body').appendChild(successPopupElement);
       } else {
-        const errorTempl = document.querySelector('#error').content;
-        const errorPopup = errorTempl.cloneNode(true);
-        errorPopup.querySelector('.error__button').addEventListener('click', () => {
+        const errorTemplElement = document.querySelector('#error').content;
+        const errorPopupElement = errorTemplElement.cloneNode(true);
+        errorPopupElement.querySelector('.error__button').addEventListener('click', () => {
           removePopup('error');
         });
-        document.querySelector('body').appendChild(errorPopup);
+        document.querySelector('body').appendChild(errorPopupElement);
       }
     }).catch(() => {
-      const errorTempl = document.querySelector('#error').content;
-      const errorPopup = errorTempl.cloneNode(true);
-      errorPopup.querySelector('.error__button').addEventListener('click', () => {
+      const errorTemplElement = document.querySelector('#error').content;
+      const errorPopupElement = errorTemplElement.cloneNode(true);
+      errorPopupElement.querySelector('.error__button').addEventListener('click', () => {
         removePopup('error');
       });
-      document.querySelector('body').appendChild(errorPopup);
+      document.querySelector('body').appendChild(errorPopupElement);
     });
   }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  const adForm = document.querySelector('.ad-form');
-  const adFormPrice = document.querySelector('#price');
-  const adFormType = document.querySelector('#type');
-  const slider = document.querySelector('.ad-form__slider');
+  const adFormElement = document.querySelector('.ad-form');
+  const adFormPriceElement = document.querySelector('#price');
+  const adFormTypeElement = document.querySelector('#type');
+  const sliderElement = document.querySelector('.ad-form__slider');
 
-  const pristine = new Pristine(adForm, {
+  const pristine = new Pristine(adFormElement, {
     classTo: 'ad-form__element',
     errorTextParent: 'ad-form__element',
     errorTextClass: 'ad-form__error-text',
     errorTextTag: 'div',
   }, false);
 
-  pristine.addValidator(adFormPrice, (value) => {
-    const min = adFormPrice.getAttribute('min');
+  pristine.addValidator(adFormPriceElement, (value) => {
+    const min = adFormPriceElement.getAttribute('min');
     return value > min;
   }, 'Недопустимое минимальное значение');
 
-  createUiSlider(slider, 5000, typeMinPriceByType(adFormType.value));
+  createUiSlider(sliderElement, 5000, typeMinPriceByType(adFormTypeElement.value));
 
-  adFormPrice.addEventListener('change', (evt) => {
-    slider.noUiSlider.set(evt.target.value);
+  adFormPriceElement.addEventListener('change', (evt) => {
+    sliderElement.noUiSlider.set(evt.target.value);
   });
 
-  adFormType.addEventListener('change', (evt) => {
+  adFormTypeElement.addEventListener('change', (evt) => {
     const minPrice = typeMinPriceByType(evt.target.value);
-    adFormPrice.setAttribute('min', minPrice);
-    slider.noUiSlider.destroy();
+    adFormPriceElement.setAttribute('min', minPrice);
+    sliderElement.noUiSlider.destroy();
 
-    createUiSlider(slider, adFormPrice.value, minPrice);
+    createUiSlider(sliderElement, adFormPriceElement.value, minPrice);
   });
 
-  const adFormTimein = document.querySelector('#timein');
-  const adFormTimeout = document.querySelector('#timeout');
+  const adFormTimeinElement = document.querySelector('#timein');
+  const adFormTimeoutElement = document.querySelector('#timeout');
 
-  adFormTimein.addEventListener('change', (evt) => {
-    adFormTimeout.value = evt.target.value;
+  adFormTimeinElement.addEventListener('change', (evt) => {
+    adFormTimeoutElement.value = evt.target.value;
   });
 
-  adFormTimeout.addEventListener('change', (evt) => {
-    adFormTimein.value = evt.target.value;
+  adFormTimeoutElement.addEventListener('change', (evt) => {
+    adFormTimeinElement.value = evt.target.value;
   });
 
-  adForm.addEventListener('submit', (evt) => {
+  adFormElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
-    sendForm(pristine, adForm);
+    sendForm(pristine, adFormElement);
   });
 });

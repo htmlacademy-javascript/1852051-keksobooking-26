@@ -1,8 +1,8 @@
 import {typeNameByType} from './data.js';
 
 const elementByCardData = (cardData) => {
-  const popupTemplate = document.querySelector('#card').content;
-  const popup = popupTemplate.cloneNode(true);
+  const popupTemplateElement = document.querySelector('#card').content;
+  const popup = popupTemplateElement.cloneNode(true);
   if (cardData.offer.title) {
     popup.querySelector('.popup__title').textContent = cardData.offer.title;
   }
@@ -23,14 +23,14 @@ const elementByCardData = (cardData) => {
   }
 
   if (cardData.offer.features) {
-    const featuresList = popup.querySelector('.popup__features');
+    const featuresListElement = popup.querySelector('.popup__features');
 
-    featuresList.innerHTML = '';
+    featuresListElement.innerHTML = '';
     for (let i = 0; i < cardData.offer.features.length; i++) {
       const feature = document.createElement('li');
       feature.classList.add('popup__feature');
       feature.classList.add(`popup__feature--${cardData.offer.features[i]}`);
-      featuresList.appendChild(feature);
+      featuresListElement.appendChild(feature);
     }
   }
 

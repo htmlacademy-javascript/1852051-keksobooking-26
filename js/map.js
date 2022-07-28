@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', () => {
       filters(offersData, markerGroup);
     });
   }).catch(() => {
-    const errorTemplate = document.querySelector('#error-get-data').content;
-    const popup = errorTemplate.cloneNode(true);
-    document.querySelector('body').appendChild(popup);
+    const errorTemplateElement = document.querySelector('#error-get-data').content;
+    const popupElement = errorTemplateElement.cloneNode(true);
+    document.querySelector('body').appendChild(popupElement);
   });
 });
 

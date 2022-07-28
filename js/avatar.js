@@ -1,17 +1,17 @@
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const fileHandle = (chooserSelector, previewSelector) => {
-  const fileChooser = document.querySelector(chooserSelector);
-  const preview = document.querySelector(previewSelector);
+  const fileChooserElement = document.querySelector(chooserSelector);
+  const previewElement = document.querySelector(previewSelector);
 
-  fileChooser.addEventListener('change', () => {
-    const file = fileChooser.files[0];
+  fileChooserElement.addEventListener('change', () => {
+    const file = fileChooserElement.files[0];
     const fileName = file.name.toLowerCase();
 
     const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
     if (matches) {
-      preview.src = URL.createObjectURL(file);
+      previewElement.src = URL.createObjectURL(file);
     }
   });
 };

@@ -6,45 +6,45 @@ const HIGH_PRICE = 50000;
 const LOW_PRICE = 10000;
 
 const filters = (offersData, markerGroup) => {
-  const housingTypeValue = document.querySelector('#housing-type').value;
-  const housingPriceValue = document.querySelector('#housing-price').value;
-  const housingRoomsValue = document.querySelector('#housing-rooms').value;
-  const housingGuestsValue = document.querySelector('#housing-guests').value;
-  const checkedFeatures = document.querySelectorAll('[name=features]:checked');
+  const housingTypeValueElement = document.querySelector('#housing-type').value;
+  const housingPriceValueElement = document.querySelector('#housing-price').value;
+  const housingRoomsValueElement = document.querySelector('#housing-rooms').value;
+  const housingGuestsValueElement = document.querySelector('#housing-guests').value;
+  const checkedFeaturesElement = document.querySelectorAll('[name=features]:checked');
   const features = [];
-  checkedFeatures.forEach((featur) => features.push(featur.value));
+  checkedFeaturesElement.forEach((featur) => features.push(featur.value));
 
   offersData = offersData.filter((offer) => {
-    if (housingTypeValue === 'any') {
+    if (housingTypeValueElement === 'any') {
       return true;
     }
-    return offer.offer.type === housingTypeValue;
+    return offer.offer.type === housingTypeValueElement;
   })
     .filter((offer) => {
-      if (housingPriceValue === DEFAULT_VALUE) {
+      if (housingPriceValueElement === DEFAULT_VALUE) {
         return true;
       }
-      if (housingPriceValue === 'middle' && offer.offer.price >= LOW_PRICE && offer.offer.price <= HIGH_PRICE) {
+      if (housingPriceValueElement === 'middle' && offer.offer.price >= LOW_PRICE && offer.offer.price <= HIGH_PRICE) {
         return true;
       }
-      if (housingPriceValue === 'low' && offer.offer.price < LOW_PRICE) {
+      if (housingPriceValueElement === 'low' && offer.offer.price < LOW_PRICE) {
         return true;
       }
-      if (housingPriceValue === 'high' && offer.offer.price > HIGH_PRICE) {
+      if (housingPriceValueElement === 'high' && offer.offer.price > HIGH_PRICE) {
         return true;
       }
     })
     .filter((offer) => {
-      if (housingRoomsValue === DEFAULT_VALUE) {
+      if (housingRoomsValueElement === DEFAULT_VALUE) {
         return true;
       }
-      return parseInt(offer.offer.rooms, 10) === parseInt(housingRoomsValue, 10);
+      return parseInt(offer.offer.rooms, 10) === parseInt(housingRoomsValueElement, 10);
     })
     .filter((offer) => {
-      if (housingGuestsValue === DEFAULT_VALUE) {
+      if (housingGuestsValueElement === DEFAULT_VALUE) {
         return true;
       }
-      return parseInt(offer.offer.guests, 10) === parseInt(housingGuestsValue, 10);
+      return parseInt(offer.offer.guests, 10) === parseInt(housingGuestsValueElement, 10);
     })
     .filter((offer) => {
 
