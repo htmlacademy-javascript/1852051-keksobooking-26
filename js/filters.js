@@ -15,7 +15,7 @@ const filters = (offersData, markerGroup) => {
   checkedFeaturesElement.forEach((featur) => features.push(featur.value));
 
   offersData = offersData.filter((offer) => {
-    if (housingTypeValueElement === 'any') {
+    if (housingTypeValueElement === DEFAULT_VALUE) {
       return true;
     }
     return offer.offer.type === housingTypeValueElement;
