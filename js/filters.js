@@ -1,17 +1,17 @@
 import {renderMarkers} from './map.js';
 import {debounce} from './utils.js';
 
+const DEFAULT_VALUE = 'any';
+const HIGH_PRICE = 50000;
+const LOW_PRICE = 10000;
+
 const filters = (offersData, markerGroup) => {
   const housingTypeValue = document.querySelector('#housing-type').value;
   const housingPriceValue = document.querySelector('#housing-price').value;
   const housingRoomsValue = document.querySelector('#housing-rooms').value;
   const housingGuestsValue = document.querySelector('#housing-guests').value;
-
   const checkedFeatures = document.querySelectorAll('[name=features]:checked');
   const features = [];
-  const DEFAULT_VALUE = 'any';
-  const HIGH_PRICE = 50000;
-  const LOW_PRICE = 10000;
   checkedFeatures.forEach((featur) => features.push(featur.value));
 
   offersData = offersData.filter((offer) => {
