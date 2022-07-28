@@ -21,7 +21,7 @@ const inactiveStatePage = () => {
   });
 };
 
-function activeStatePage() {
+const activeStatePage = () => {
   const adForm = document.querySelector('.ad-form');
   adForm.classList.remove('ad-form--disabled');
 
@@ -41,7 +41,7 @@ function activeStatePage() {
   mapFiltersForm.querySelectorAll('input').forEach((el) => {
     el.removeAttribute('disabled');
   });
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   inactiveStatePage();

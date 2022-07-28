@@ -2,7 +2,7 @@ import {typeMinPriceByType} from './data.js';
 import {saveOffer} from './network.js';
 import {removePopup} from './popup.js';
 
-function createUiSlider(slider, start, min) {
+const createUiSlider = (slider, start, min) => {
   noUiSlider.create(slider, {
     start: start,
     connect: true,
@@ -19,7 +19,7 @@ function createUiSlider(slider, start, min) {
     adFormPrice.value = price;
     adFormPrice.placeholder = price;
   });
-}
+};
 
 const sendForm = (pristine, adForm) => {
   const isValid = pristine.validate();
