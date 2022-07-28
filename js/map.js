@@ -27,15 +27,17 @@ const renderMarkers = (offersData, markerGroup) => {
   });
 };
 
+const DEFAULT_LOCATION = {
+  lat: 35.6863,
+  lng: 139.7388,
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map-canvas')
     .on('load', () => {
       activeStatePage();
     })
-    .setView({
-      lat: 35.6863,
-      lng: 139.7388,
-    }, 14);
+    .setView(DEFAULT_LOCATION, 14);
 
   L.tileLayer(
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -51,10 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const marker = L.marker(
-    {
-      lat: 35.6863,
-      lng: 139.7388,
-    },
+    DEFAULT_LOCATION,
     {
       draggable: true,
       icon: mainPinIcon,
